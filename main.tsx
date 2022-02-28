@@ -11,7 +11,7 @@ function handler(req: Request): Response {
   const randomNumber = Math.random() * (games.length - 1) + 1;
   const randomGame = games[randomNumber];
 
-  return new Response("Game: " + randomGame.name + ", description: " + randomGame.description);
+  return new Response("Game: " + randomGame + ", description: ");
 }
 
 console.log("Listening on http://localhost:8000");
