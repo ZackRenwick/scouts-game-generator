@@ -8,8 +8,8 @@ const games = [
 
 function handler(req: Request): Response {
   
-  const randomNumber = Math.random() * (games.length - 1) + 1;
-  const randomGame = games[1];
+  const randomNumber = Math.floor(Math.random() * (games.length - 1) + 1);
+  const randomGame = games[randomNumber];
 
   return new Response("Game: " + randomGame.name + ", description: " + randomGame.description);
 }
