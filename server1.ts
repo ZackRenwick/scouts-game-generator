@@ -1,4 +1,7 @@
-import { serve } from "https://deno.land/std@0.120.0/http/server.ts";
+import { listenAndServe } from "https://deno.land/std@0.110.0/http/server.ts";
+
+const addr = ":8080";
+const HTML = await Deno.readFile("./index.html");
 
 const games = [
   {"name": "lazy hack", "description": "lazy hack"},
@@ -9,12 +12,59 @@ const games = [
   {"name":"Pirates treasure", "description":"get everyone into a circle with a hole in it between 2 designated people(helpers, leaders or designated in some other way), pick someone to guard the treasure(keys or something that makes a sound). one by one a child is chosen to steal the trasure. This person takes the treasure as quietly as possible and has to get round the circle anti clockwise. if the runner is caught by the pirate then they also sit in the circle. The next runner now has to run round the circle twice(this continues if the next runner is caught. if there is 5 people in the circle then they are running 6 times). "}
 ]
 
-function handler(req: Request): Response {
-  
-  const randomNumber = Math.floor(Math.random() * (games.length - 1) + 1);
-  const randomGame = games[randomNumber];
+async function handleRequest(request: Request): Promise<Response> {
+    const { pathname } = new URL(request.url);
+    console.log(pathname);
 
-  return new Response("Game: " + randomGame.name + ", description: " + randomGame.description);
-}
+ 
+    if (pathname.startsWith("/main.css")) {
+      const file = await Deno.readFile("./main.css");
+      return new Response(file, {
+        headers: {
+          "content-type": "text/css",
+        },
+      });
+    }
 
-await serve(handler);
+    if(pathname.startsWith("/Scouts_Logo_Marque_Purple.png")) {
+        const file = await Deno.readFile("./Scouts_Logo_Marque_Purple.png");
+        return new Response(file, {
+        headers: {
+            "content-type": "image/png",
+        },
+        });
+    }
+    if(pathname.startsWith("/listOfGames")) {
+      const file = await Deno.readFile("./listOfGames.html");
+        return new Response(file, {
+        headers: {
+            "content-type": "text/html",
+        },
+        })
+    }
+    if(pathname.startsWith("/randomGame")) {
+      const file = await Deno.readFile("./randomGame.html");
+        return new Response(file, {
+        headers: {
+            "content-type": "text/html",
+        },
+        })
+    }
+    if(pathname.startsWith("/getRandomGame")) {
+        const randomNumber = Math.floor(Math.random() * (games.length - 1) + 1);
+      const randomGame = games[randomNumber];
+    
+      return new Response("Game: " + randomGame.name + ", description: " + randomGame.description);
+    }
+    if(pathname.startsWith("/getAllGames")) {
+      return new Response(JSON.stringify(games), {headers: {"content-type": "application/json"}});
+    }
+  return new Response(HTML, {
+    headers: {
+      "content-type": "text/html",
+    },
+  });
+};
+
+console.log(`HTTP webserver running. Access it at: http://localhost:8080/`);
+await listenAndServe(addr, handleRequest);
