@@ -5,6 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scout Games</title>
+
+    <link rel="stylesheet" href="./main.css">
+    <script>
+        function httpGet(theUrl) {
+            let xmlHttpReq = new XMLHttpRequest();
+            xmlHttpReq.open("GET", theUrl, false); 
+            xmlHttpReq.send(null);
+            return xmlHttpReq.responseText;
+        }
+        function populateRandomGame(game) {
+            let readableGame = JSON.parse(game);
+            document.getElementById("gameName").innerHTML = readableGame.name;
+            document.getElementById("gameDescription").innerHTML = readableGame.description;
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            populateRandomGame(httpGet('/getRandomGame'));
+        });
+
+    </script>
 </head>
 <body>
     <div class="topnav">
@@ -13,11 +32,21 @@
         <a class="active" href="#contact">Random Games</a>
         <a href="#about">About</a>
     </div>
-    <h1>Scout Games</h1>     
-    <p>Have you ever been stuck with a game to play with the scouts? If so, this is the site for you</p>
-    <div class="flex centre">
-        <h2>Game name: </h2>
-        <p>Description: </p>
+    
+    <div class="align-content-centre" style="margin: 10px 100px;">
+
+      <div>
+        <h1>Random Game</h1>   
+        
+        <div>
+            <h2>Game name:<span id="gameName"> </span></h2>
+            <p>Description:<span id="gameDescription"> </span></p>
+        </div>
+
+        <button onclick="populateRandomGame(httpGet('/getRandomGame'))">Give me a New game</button>
+      </div>
+
+        
     </div>
 </body>
 </html>

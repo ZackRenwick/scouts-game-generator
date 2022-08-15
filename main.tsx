@@ -54,7 +54,7 @@ async function handleRequest(request: Request): Promise<Response> {
         const randomNumber = Math.floor(Math.random() * (games.length - 1) + 1);
       const randomGame = games[randomNumber];
     
-      return new Response("Game: " + randomGame.name + ", description: " + randomGame.description);
+      return new Response(JSON.stringify(randomGame), {headers: {"content-type": "application/json"}});
     }
     if(pathname.startsWith("/getAllGames")) {
       return new Response(JSON.stringify(games), {headers: {"content-type": "application/json"}});
