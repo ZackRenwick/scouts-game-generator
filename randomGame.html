@@ -11,8 +11,19 @@
         function httpGet(theUrl) {
             let xmlHttpReq = new XMLHttpRequest();
             xmlHttpReq.open("GET", theUrl, false); 
-            xmlHttpReq.send(null);
-            return xmlHttpReq.responseText;
+            xmlHttpReq.onload = (e) => {
+            if (xmlHttpReq.readyState === 4) {
+                if (xmlHttpReq.status === 200) {
+                    populateRandomGame(xmlHttpReq.responseText);
+                } else {
+                    console.error(xmlHttpReq.statusText);
+                }
+            }
+            };
+            xmlHttpReq.onerror = (e) => {
+                console.error(xmlHttpReq.statusText);
+            };
+            xmlHttpReq.send(null); 
         }
         function populateRandomGame(game) {
             let readableGame = JSON.parse(game);
@@ -20,7 +31,7 @@
             document.getElementById("gameDescription").innerHTML = readableGame.description;
         }
         document.addEventListener("DOMContentLoaded", function() {
-            populateRandomGame(httpGet('/getRandomGame'));
+            httpGet('/getRandomGame');
         });
 
     </script>
@@ -42,7 +53,7 @@
             <p>Description:<span id="gameDescription"> </span></p>
         </div>
 
-        <button onclick="populateRandomGame(httpGet('/getRandomGame'))">Give me a New game</button>
+        <button onclick="httpGet('/getRandomGame')">Give me a New game</button>
       </div>
 
         

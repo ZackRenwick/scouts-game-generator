@@ -7,12 +7,29 @@
     <title>Scout Games</title>
     <link rel="stylesheet" href="./main.css">
     <script>
+
+const xhr = new XMLHttpRequest();
+xhr.open("GET", "/bar/foo.txt", true);
+
         function httpGet(theUrl) {
             let xmlHttpReq = new XMLHttpRequest();
             xmlHttpReq.open("GET", theUrl, false); 
-            xmlHttpReq.send(null);
-            return xmlHttpReq.responseText;
+            xmlHttpReq.onload = (e) => {
+            if (xmlHttpReq.readyState === 4) {
+                if (xmlHttpReq.status === 200) {
+                    populateAllGames(xmlHttpReq.responseText);
+                } else {
+                    console.error(xmlHttpReq.statusText);
+                }
+            }
+            };
+            xmlHttpReq.onerror = (e) => {
+                console.error(xmlHttpReq.statusText);
+            };
+            xmlHttpReq.send(null); 
         }
+
+
         function populateAllGames(games) {
             let readableGames = JSON.parse(games);
             let numberOfGames = Object.keys(readableGames).length;
@@ -31,7 +48,7 @@
 
         }
         document.addEventListener("DOMContentLoaded", function() {
-            populateAllGames(httpGet('/getAllGames'));
+            httpGet('/getAllGames');
         });
 
     </script>
