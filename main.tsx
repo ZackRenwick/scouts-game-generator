@@ -37,8 +37,8 @@ async function handleRequest(request: Request): Promise<Response> {
       });
     }
 
-    if(pathname.startsWith("/Scouts_Logo_Marque_Purple.png")) {
-        const file = await Deno.readFile("./Scouts_Logo_Marque_Purple.png");
+    if(pathname.includes("Scouts_Logo_Marque_Purple.png")) {
+        const file = await Deno.readFile("./assets/images/Scouts_Logo_Marque_Purple.png");
         return new Response(file, {
         headers: {
             "content-type": "image/png",
