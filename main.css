@@ -51,3 +51,9 @@ body {
   background-color: #7413dc;
   color: white;
 }
+
+.inputTextBox {
+  display: block;
+  width: 300px;
+  height:200px;
+}
