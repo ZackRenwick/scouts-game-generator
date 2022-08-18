@@ -7,44 +7,31 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
-    <link rel="manifest" href="./assets/favicon/site.webmanifest">
     <title>Scout Games</title>
 
     <link rel="stylesheet" href="./main.css">
     <script>
-        function httpGet(theUrl) {
-            let xmlHttpReq = new XMLHttpRequest();
-            xmlHttpReq.open("GET", theUrl, false); 
-            xmlHttpReq.onload = (e) => {
-            if (xmlHttpReq.readyState === 4) {
-                if (xmlHttpReq.status === 200) {
-                    populateRandomGame(xmlHttpReq.responseText);
-                } else {
-                    console.error(xmlHttpReq.statusText);
-                }
-            }
-            };
-            xmlHttpReq.onerror = (e) => {
-                console.error(xmlHttpReq.statusText);
-            };
-            xmlHttpReq.send(null); 
+        
+        async function getRandomGame() {
+            let myObject = await fetch("getRandomGame");
+            let myText = await myObject.text();
+            populateRandomGame(myText);
         }
+
         function populateRandomGame(game) {
             let readableGame = JSON.parse(game);
             document.getElementById("gameName").innerHTML = readableGame.name;
             document.getElementById("gameDescription").innerHTML = readableGame.description;
         }
-        document.addEventListener("DOMContentLoaded", function() {
-            httpGet('/getRandomGame');
-        });
+        getRandomGame();
 
     </script>
 </head>
 <body>
     <div class="topnav">
-        <a href="./index.html">Home</a>
-        <a href="./listOfGames.html">All games</a>
-        <a class="active" href="./randomGame.html">Random Games</a>
+        <a href="/homepage">Home</a>
+        <a href="/listOfGames">All games</a>
+        <a class="active" href="/randomGame">Random Games</a>
     </div>
     
 
