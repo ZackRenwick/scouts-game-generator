@@ -36,6 +36,34 @@ async function handleRequest(request: Request): Promise<Response> {
       });
     }
 
+    if (pathname.startsWith("/favicon-16x16.png")) {
+      const file = await Deno.readFile("./assets/favicon/favicon-16x16.png");
+      return new Response(file, {
+        headers: {
+          "content-type": "image/png",
+        },
+      });
+    }
+
+    if (pathname.startsWith("/favicon-32x32.png")) {
+      const file = await Deno.readFile("./assets/favicon/favicon-32x32.png");
+      return new Response(file, {
+        headers: {
+          "content-type": "image/png",
+        },
+      });
+    }
+
+    if (pathname.startsWith("site.manifest")) {
+      const file = await Deno.readFile("./assets/favicon/site.manifest");
+      return new Response(file, {
+        headers: {
+          "content-type": "application/manifest+json",
+        },
+      });
+    }
+    
+
     if(pathname.includes("Scouts_Logo_Marque_Purple.png")) {
         const file = await Deno.readFile("./assets/images/Scouts_Logo_Marque_Purple.png");
         return new Response(file, {
@@ -102,5 +130,4 @@ async function handleRequest(request: Request): Promise<Response> {
   });
 };
 
-console.log(`HTTP webserver running. Access it at: http://localhost:8080/`);
 await listenAndServe(addr, handleRequest);
