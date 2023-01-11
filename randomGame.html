@@ -21,8 +21,8 @@
 
         function populateRandomGame(game) {
             let readableGame = JSON.parse(game);
-            document.getElementById("gameName").innerHTML = readableGame.name;
-            document.getElementById("gameDescription").innerHTML = readableGame.description;
+            document.getElementById("gameName").innerHTML = readableGame.game_name;
+            document.getElementById("gameDescription").innerHTML = readableGame.game_description;
         }
         getRandomGame();
 

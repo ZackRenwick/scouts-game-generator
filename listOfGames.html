@@ -26,8 +26,8 @@
                 let gameContainer = document.createElement("div");
                 let gameName = document.createElement("h2");
                 let description = document.createElement("p");
-                gameName.innerHTML = readableGames[i].name;
-                description.innerHTML= readableGames[i].description;
+                gameName.innerHTML = readableGames[i].game_name;
+                description.innerHTML= readableGames[i].game_description;
                 gameContainer.appendChild(gameName);
                 gameContainer.appendChild(description);
                 div.appendChild(gameContainer);
