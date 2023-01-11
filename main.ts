@@ -81,14 +81,6 @@ async function handleRequest(request: Request): Promise<Response> {
         })
     }
 
-    if(pathname.includes("/morseCode.js")) {
-      const file = await Deno.readFile("./js/morseCode.js");
-        return new Response(file, {
-        headers: {
-            "content-type": "application/js",
-        },
-        })
-    }
     if(pathname.startsWith("/getRandomGame")) {
         const randomNumber = Math.floor(Math.random() * games.length + 1);
       const randomGame = games[randomNumber];
