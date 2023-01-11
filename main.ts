@@ -71,14 +71,7 @@ async function handleRequest(request: Request): Promise<Response> {
         },
         })
     }
-    if(pathname.startsWith("/morseCode")) {
-      const file = await Deno.readFile("./morseCode.html");
-        return new Response(file, {
-        headers: {
-            "content-type": "text/html",
-        },
-        })
-    }
+
     if(pathname.startsWith("/homepage")) {
       const file = await Deno.readFile("./index.html");
         return new Response(file, {
