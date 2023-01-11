@@ -3,7 +3,7 @@ import { listenAndServe } from "https://deno.land/std@0.110.0/http/server.ts";
 const addr = ":8081";
 const ERROR_HTML = await Deno.readFile("./error.html");
 
-const games = JSON.parse(Deno.readTextFileSync("./games.json"));
+const games = JSON.parse(await Deno.readTextFile("./games.json"));
 
 async function handleRequest(request: Request): Promise<Response> {
     const { pathname } = new URL(request.url);
