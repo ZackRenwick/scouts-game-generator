@@ -8,8 +8,8 @@ async function handleRequest(request: Request): Promise<Response> {
 
     const validPath = validatePathAndReturnPathToServe(pathname);
 
-    if ("" === validPath.urlPath) {
-      const errorhtml = await Deno.readFile("./error.html");
+    if ("No Valid Path" === validPath.urlPath) {
+      const errorhtml = await Deno.readFile("./pages/error.html");
       return new Response(errorhtml, {
         headers: {
           "content-type": "text/html",
@@ -30,9 +30,9 @@ async function handleRequest(request: Request): Promise<Response> {
         return new Response(JSON.stringify(games), {headers: {"content-type": contentType}});
       }
     }
-
-    let fileToRead = "./" + validPath.resourcePath + validPath.urlPath + "." + validPath.extention;
-
+    const useFileExtention = "javascript" !== validPath.extention;
+    const fileExtention = useFileExtention ?  "." + validPath.extention : "";
+    let fileToRead = "./" + validPath.resourcePath + validPath.urlPath + fileExtention;
     if ("manifest+json" === validPath.extention) {
       fileToRead = "./assets/favicon/" + validPath.urlPath;
     } else if ("png" === validPath.extention) {
@@ -49,7 +49,7 @@ async function handleRequest(request: Request): Promise<Response> {
 }
 
 function validatePathAndReturnPathToServe(pathname: string): { urlPath: string, resourcePath: string, contentType: string, extention: string }  {
-  let pathObject: { urlPath: string, resourcePath: string, contentType: string, extention: string }  = {"urlPath": "", resourcePath: "", "contentType": "", "extention": ""};
+  let pathObject: { urlPath: string, resourcePath: string, contentType: string, extention: string }  = {urlPath: "No Valid Path", resourcePath: "", contentType: "", extention: ""};
   validPaths.forEach(validPath => {
     if (pathname.includes(validPath.urlPath)) {
       pathObject = validPath;

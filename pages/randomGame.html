@@ -11,22 +11,7 @@
     <title>Scout Games</title>
 
     <link rel="stylesheet" href="./main.css">
-    <script>
-        
-        async function getRandomGame() {
-            let myObject = await fetch("getRandomGame");
-            let myText = await myObject.text();
-            populateRandomGame(myText);
-        }
-
-        function populateRandomGame(game) {
-            let readableGame = JSON.parse(game);
-            document.getElementById("gameName").innerHTML = readableGame.game_name;
-            document.getElementById("gameDescription").innerHTML = readableGame.game_description;
-        }
-        getRandomGame();
-
-    </script>
+    <script src ="../js/randomGames.js"></script>
 </head>
 <body>
     <div class="topnav">

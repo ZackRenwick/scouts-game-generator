@@ -10,36 +10,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="site.webmanifest">
-    <script>
-    
-        async function getAllGames() {
-            let myObject = await fetch("getAllGames");
-            let myText = await myObject.text();
-            populateAllGames(myText);
-        }
-
-        function populateAllGames(games) {
-            let readableGames = JSON.parse(games);
-            let numberOfGames = Object.keys(readableGames).length;
-            let div = document.createElement("div");
-            for (let i=0; i < numberOfGames; i++) {
-                let gameContainer = document.createElement("div");
-                let gameName = document.createElement("h2");
-                let description = document.createElement("p");
-                gameName.innerHTML = readableGames[i].game_name;
-                description.innerHTML= readableGames[i].game_description;
-                gameContainer.appendChild(gameName);
-                gameContainer.appendChild(description);
-                div.appendChild(gameContainer);
-            }
-            document.getElementById('gamesList').appendChild(div);
-
-        }
-        getAllGames();
-       
-
-    </script>
-</head>
+    <script src ="../js/listOfGames.js"></script>
 <body>
     <div class="topnav">
         <a href="/homepage">Home</a>
@@ -54,6 +25,5 @@
                 <img class="scout-logo" src="./Scouts_Logo_Marque_Purple.png" alt="Scout Logo in Purple">   
             </div> 
     <div id="gamesList"></div>
-    
 </body>
 </html>

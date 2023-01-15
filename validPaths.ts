@@ -11,5 +11,7 @@ export const validPaths = [
     {"urlPath":"Scouts_Logo_Marque_Purple", "resourcePath": "", "contentType": "image", "extention": "png"},
     {"urlPath":"randomGame", "resourcePath": "pages/", "contentType": "text", "extention": "html"},
     {"urlPath":"listOfGames","resourcePath": "pages/", "contentType": "text", "extention": "html"},
-    {"urlPath":"homepage", "resourcePath": "pages/", "contentType": "text", "extention": "html"}
+    {"urlPath":"homepage", "resourcePath": "pages/", "contentType": "text", "extention": "html"},
+    {"urlPath":"listOfGames.js", "resourcePath": "js/", "contentType": "application", "extention": "javascript"},
+    {"urlPath":"randomGames.js", "resourcePath": "js/", "contentType": "application;", "extention": "javascript"},
 ]
