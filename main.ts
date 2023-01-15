@@ -30,9 +30,11 @@ async function handleRequest(request: Request): Promise<Response> {
         return new Response(JSON.stringify(games), {headers: {"content-type": contentType}});
       }
     }
+
     const useFileExtention = "javascript" !== validPath.extention;
     const fileExtention = useFileExtention ?  "." + validPath.extention : "";
     let fileToRead = "./" + validPath.resourcePath + validPath.urlPath + fileExtention;
+    
     if ("manifest+json" === validPath.extention) {
       fileToRead = "./assets/favicon/" + validPath.urlPath;
     } else if ("png" === validPath.extention) {
