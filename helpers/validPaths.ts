@@ -1,7 +1,7 @@
 export const validPaths = [
     {"urlPath":"getRandomGame", "resourcePath": "","contentType": "application", "extention": "json"},
     {"urlPath":"getAllGames", "resourcePath": "","contentType": "application", "extention": "json"},
-    {"urlPath":"main", "resourcePath": "","contentType": "text", "extention": "css"},
+    {"urlPath":"main", "resourcePath": "css/","contentType": "text", "extention": "css"},
     {"urlPath":"favicon-16x16", "resourcePath": "","contentType": "image", "extention": "png"},
     {"urlPath":"favicon-32x32", "resourcePath": "","contentType": "image", "extention": "png"},
     {"urlPath":"android-chrome-192x192", "resourcePath": "","contentType": "image", "extention": "png"},

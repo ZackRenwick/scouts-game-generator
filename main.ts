@@ -1,5 +1,5 @@
 import { listenAndServe } from "https://deno.land/std@0.110.0/http/server.ts";
-import { validPaths } from "./validPaths.ts";
+import { validPaths } from "./helpers/validPaths.ts";
 
 const addr = ":8081";
 
@@ -34,7 +34,7 @@ async function handleRequest(request: Request): Promise<Response> {
     const useFileExtention = "javascript" !== validPath.extention;
     const fileExtention = useFileExtention ?  "." + validPath.extention : "";
     let fileToRead = "./" + validPath.resourcePath + validPath.urlPath + fileExtention;
-    
+
     if ("manifest+json" === validPath.extention) {
       fileToRead = "./assets/favicon/" + validPath.urlPath;
     } else if ("png" === validPath.extention) {
