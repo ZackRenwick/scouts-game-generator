@@ -1,9 +1,7 @@
 import * as postgres from "https://deno.land/x/postgres@v0.14.2/mod.ts";
 import { GET_ALL_GAMES } from "./queries.ts";
-import { config } from 'https://deno.land/x/dotenv@v1.0.1/mod.ts';
-config({ export: true })
 
-const databaseUrl = await Deno.env.get("DATABASE_URL")!; 
+const databaseUrl = await Deno.env.get("SCOUT_GAMES_DATABASE_URL")!; 
 
 export async function getAllGames(): Promise<string> {
     
