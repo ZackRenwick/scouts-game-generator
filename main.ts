@@ -1,7 +1,9 @@
 import { listenAndServe } from "https://deno.land/std@0.110.0/http/server.ts";
 import { validPaths } from "./helpers/validPaths.ts";
+import { getAllGames } from "./helpers/gamesDao.ts";
 
 const addr = ":8081";
+const games = JSON.parse(await getAllGames());
 
 async function handleRequest(request: Request): Promise<Response> {
     const { pathname } = new URL(request.url);
@@ -19,7 +21,6 @@ async function handleRequest(request: Request): Promise<Response> {
      
     if ("json" === validPath.extention) {
       const contentType = validPath.contentType + validPath.extention;
-      const games = JSON.parse(await Deno.readTextFile("./data/games.json"));
       if("getRandomGame" === validPath.urlPath) {
         const randomNumber = Math.floor(Math.random() * games.length + 1);
         const randomGame = games[randomNumber];

@@ -5,17 +5,19 @@ config({ export: true })
 
 const databaseUrl = await Deno.env.get("DATABASE_URL")!; 
 
-export async function getAllGames() {
+export async function getAllGames(): Promise<string> {
     
     const pool = new postgres.Pool(databaseUrl, 3, true);
 
     const connection = await pool.connect();
     try {
         const result = await connection.queryObject(GET_ALL_GAMES);
+
         const jsonResult = JSON.stringify(result.rows);
         return jsonResult;
     } finally {
         connection.release();
+        pool.end();
     }
     
 }

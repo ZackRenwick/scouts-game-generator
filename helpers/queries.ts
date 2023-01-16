@@ -1,1 +1,1 @@
-export const GET_ALL_GAMES = "SELECT game_id, game_category, game_name, game_description from scout_games.games;";
+export const GET_ALL_GAMES = "SELECT game_id, game_category, game_name, game_description from games;";
